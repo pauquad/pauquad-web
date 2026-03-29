@@ -312,17 +312,17 @@ import Layout from '../layouts/Layout.astro';
                 
                 <div class="form-group">
                     <label for="full-name">Nombre</label>
-                    <input type="text" id="full-name" name="ContactName" placeholder="Tu nombre" required>
+                    <input type="text" id="full-name" name="name" placeholder="Tu nombre" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email-address">Tu E-mail</label>
-                    <input type="email" id="email-address" name="ContactMail" placeholder="E-mail" required>
+                    <input type="email" id="email-address" name="email" placeholder="E-mail" required>
                 </div>
 
                 <div class="form-group">
                     <label for="message">Mensaje</label>
-                    <textarea id="message" name="ContactComment" rows="6" placeholder="Tu mensaje" required></textarea>
+                    <textarea id="message" name="message" rows="6" placeholder="Tu mensaje" required></textarea>
                 </div>
 
                 <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
@@ -410,6 +410,45 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		document.addEventListener('DOMContentLoaded', initOverlayCarousel);
+
+	// FORMULARIO DE CONTACTO
+
+		const contactForm = document.querySelector('.contact-form');
+	
+	if (contactForm) {
+		contactForm.addEventListener('submit', async (e) => {
+		e.preventDefault(); // Evita que la página se recargue
+		
+		const status = document.createElement('p'); // Creamos un mensaje de estado
+		status.style.marginTop = "20px";
+		status.style.color = "var(--accent-color)"; // Usa tu color de marca
+		
+		const data = new FormData(contactForm);
+		
+		try {
+			const response = await fetch(contactForm.action, {
+			method: 'POST',
+			body: data,
+			headers: {
+				'Accept': 'application/json'
+			}
+			});
+			
+			if (response.ok) {
+			contactForm.innerHTML = `
+				<div class="glass-overlay" style="padding: 2rem; border-radius: 15px; text-align: center;">
+				<h3 style="color: white;">¡Mensaje enviado con éxito!</h3>
+				<p style="color: rgba(255,255,255,0.7);">Me pondré en contacto con vos lo antes posible.</p>
+				</div>`;
+			} else {
+			const errorData = await response.json();
+			alert("Hubo un problema: " + (errorData.errors.map(e => e.message).join(", ")));
+			}
+		} catch (error) {
+			alert("Oops! Algo salió mal al intentar enviar el formulario.");
+		}
+		});
+	}	
 	</script>
 
 </Layout>
