@@ -1,0 +1,128 @@
+---
+// Importamos tu CSS global
+import '../styles/global.css';
+
+// Recibimos el título y el idioma (por defecto 'es')
+const { title = "Paula Quadrelli", lang = "es" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/3d8011cf10.js" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+	<title>{title}</title>
+</head>
+
+<body>
+
+	<div class="container">
+		<header id="header">
+			<nav id="navbar" class="nav">
+
+                <div class="nav-container">
+
+                    <a href="/#welcome-section" class="nav-logo">
+                        <img src="/images/logo-pq.svg" alt="Logo Paula Quadrelli" />
+                    </a>
+
+                    <button id="menu-toggle" class="menu-toggle">MENU</button>
+
+                    <ul class="nav-list" id="nav-list">
+                        <li>
+                            <a href="/#welcome-section">Inicio </a>
+                        </li>
+                        <li>
+                            <a href="/#projects">Proyectos </a>
+                        </li>
+                        <li>
+                            <a href="/blog">Blog </a>
+                        </li>
+                        <li>
+                            <a href="/#contact">Contacto </a>
+                        </li>
+                    </ul>
+
+                </div>
+			</nav>
+		</header>
+
+        <slot />
+
+		<hr>
+		
+		<footer>
+			<div class="contact-links">
+				<a href="https://www.linkedin.com/in/paula-quadrelli/" target="_blank" class="btn contact-details">
+					<i class="fab fa-linkedin"></i> Linkedin
+				</a>
+				<a id="profile-link" href="https://github.com/pauquad" target="_blank" class="btn contact-details"><i class="fab fa-github"></i> GitHub</a>
+				<a href="https://soundcloud.com/pauquad" target="_blank" class="btn contact-details">
+					<i class="fa-brands fa-soundcloud"></i> SoundCloud</a>
+				<a href="https://www.youtube.com/channel/UCUo7xApoMV-jCgsUSQ7eeTQ/featured" target="_blank" class="btn contact-details">
+					<i class="fab fa-youtube"></i> Youtube</a>
+				<a href="https://pauquad.itch.io/" target="_blank" class="btn contact-details">
+					<i class="fa-brands fa-itch-io"></i> Itch.io</a>
+				<a href="https://www.fiverr.com/pautina" target="_blank" class="btn contact-details one"> Fiverr</a>
+			</div>
+		</footer>
+
+	</div>
+
+	<script>
+		const menuToggle = document.getElementById('menu-toggle');
+		const navList = document.getElementById('nav-list');
+		const navLinks = document.querySelectorAll('.nav-list a');
+
+		// Toggle the menu when the button is clicked
+		if(menuToggle && navList) {
+            menuToggle.addEventListener('click', () => {
+                navList.classList.toggle('active');
+
+                // Change button text from MENU to CLOSE
+                if (navList.classList.contains('active')) {
+                    menuToggle.textContent = 'CLOSE';
+                } else {
+                    menuToggle.textContent = 'MENU';
+                }
+            });
+        }
+
+		// Close the menu automatically when a link is clicked
+		navLinks.forEach(link => {
+			link.addEventListener('click', () => {
+				navList.classList.remove('active');
+				if(menuToggle) menuToggle.textContent = 'MENU';
+			});
+		});
+
+        // Botón ir arriba
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+            backToTopBtn?.classList.add('show');
+            } else {
+            backToTopBtn?.classList.remove('show');
+            }
+        });
+
+        backToTopBtn?.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+	</script>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Volver al inicio">
+  <i class="fas fa-chevron-up"></i> </button>
+</body>
+</html>

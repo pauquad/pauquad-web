@@ -1,17 +1,413 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Paula Quadrelli | Portfolio" lang="es">
+    
+    <section id="welcome-section" class="welcome-section">
+	
+		<div class="intro-text">
+			<h1>PAULA QUADRELLI</h1>
+			<p class="subtitle">Compositora musical</p>
+			<p class="bio">
+			</p>
+		</div>
+
+		<div class="carousel-container">
+			<button class="carousel-control prev" id="prev-btn">
+				<i class="fas fa-chevron-left"></i>
+			</button>
+
+			<div class="carousel" id="carousel">
+				<div class="carousel-item">
+					<img src="/images/carrusel/arcoiris1.jpeg" alt="" loading="eager" />
+					<div class="glass-overlay"></div>
+				</div>
+				
+				<div class="carousel-item">
+					<img src="/images/carrusel/arcoiris2.jpg" alt="" loading="eager" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/arcoiris3.png" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/arcoIrisSetup.jpg" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/dueñosdelpasado.jpeg" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/estudiosasha1.jpeg" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/estudiosasha2.jpeg" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/grabacion.jpeg" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/guitarra1.png" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/lontano1.jpeg" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/lontano2.jpeg" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/images/carrusel/taylormini.jpeg" alt="" loading="lazy" />
+					<div class="glass-overlay"></div>
+				</div>
+				
+			</div>
+
+			<button class="carousel-control next" id="next-btn">
+				<i class="fas fa-chevron-right"></i>
+			</button>
+
+			<div class="carousel-dots" id="carousel-dots"></div>
+		</div>
+
+	</section>
+
+    <hr>
+
+    <section id="projects" class="projects-section">
+
+		<div class="project-category">
+			<h2>Música para Cortos</h2>
+			<div class="projects-grid grid-short-films"> <article class="project-card">
+				<div class="video-wrapper">
+				<iframe 
+					src="https://www.youtube.com/embed/nFqppiFEuSI?si=P0LgEPD1QSI_Y4UT" 
+					title="YouTube video player" 
+					frameborder="0" 
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+					referrerpolicy="strict-origin-when-cross-origin" 
+					allowfullscreen>
+				</iframe>
+				</div>
+				<div class="project-content">
+				<h3>La Sombra de Watón</h3>
+				<p>Banda sonora colaborativa.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<div style="padding:56.25% 0 0 0; position:relative;">
+				<iframe
+					src="https://player.vimeo.com/video/1091987360?h=22a8c6d20d&badge=0&autopause=0&player_id=0&app_id=58479"
+					frameborder="0"
+					allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+					referrerpolicy="strict-origin-when-cross-origin"
+					style="position:absolute;top:0;left:0;width:100%;height:100%;"
+					title="Dueños del Pasado - 2025">
+				</iframe>
+				</div>
+				<div class="project-content">
+				<h3>Dueños del Pasado</h3>
+				<p>Composición original para cortometraje.</p>
+				</div>
+				<script src="https://player.vimeo.com/api/player.js"></script>
+			</article>
+
+			</div>
+		</div>
+
+		<hr class="section-divider" />
+
+		<div class="project-category">
+			<h2>Música para Videojuegos</h2>
+			<div class="projects-grid">
+			
+			<article class="project-card">
+				<iframe frameborder="0" src="https://itch.io/embed/2371829" width="100%" height="167"></iframe>
+				<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1786854360&color=%23ff5500&auto_play=false&visual=true"></iframe>
+				<div class="project-content">
+				<h3>Voiderling</h3>
+				<p>Composición y diseño sonoro interactivo.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe frameborder="0" src="https://itch.io/embed/2215672" width="100%" height="167"></iframe>
+				<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1687131930&color=%23ff5500&auto_play=false"></iframe>
+				<div class="project-content">
+				<h3>Viajes Internos</h3>
+				<p>Composición y SFXs.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<a href="https://globalgamejam.org/2023/games/tree-gees-4" target="_blank" class="jam-link">
+					<img src="/images/TreeGees1.png" alt="Tree Gees" class="project-img">
+				</a>
+				<iframe class="responsive-video" src="https://www.youtube.com/embed/3BHvfP15G8g?start=119" frameborder="0" allowfullscreen></iframe>
+				<div class="project-content">
+					<h3>The Tree Gees</h3>
+					<p>Global Game Jam 2023.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe frameborder="0" src="https://itch.io/embed/1880907" width="100%" height="167"></iframe>
+				<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1614698124&color=%23ff5500&auto_play=false"></iframe>
+				<div class="project-content">
+				<h3>WATERSUB</h3>
+				<p>Música, diseño sonoro e implementación.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe frameborder="0" src="https://itch.io/embed/1704258" width="100%" height="167"></iframe>
+				<iframe class="responsive-video" src="https://www.youtube.com/embed/BNCoe1HTGsk" frameborder="0" allowfullscreen></iframe>
+				<div class="project-content">
+				<h3>Tanuk, the Corruption Purifier</h3>
+				<p>Música interactiva (remezcla vertical) e implementación en Wwise.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe frameborder="0" src="https://itch.io/embed/1725681" width="100%" height="167"></iframe>
+				<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1508527921&color=%23ff5500&auto_play=false"></iframe>
+				<div class="project-content">
+				<h3>Vestigios</h3>
+				<p>Música, ambientes, paisajes sonoros y efectos de sonido.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe frameborder="0" src="https://itch.io/embed/1672829" width="100%" height="167"></iframe>
+				<iframe class="responsive-video" src="https://www.youtube.com/embed/67EJHptiZfg" title="Trailer" frameborder="0" allowfullscreen></iframe>
+				<div class="project-content">
+				<h3>Vini: Fuera de Órbita</h3>
+				<p>Música y diseño sonoro.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe frameborder="0" src="https://itch.io/embed/1169010?linkback=true" width="100%" height="167"></iframe>
+				<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1431264376&color=%23ff5500&auto_play=false"></iframe>
+				<div class="project-content">
+				<h3>Bunny's Nightmare</h3>
+				<p>Música y diseño sonoro.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe frameborder="0" src="https://itch.io/embed/1186426" width="100%" height="167"></iframe>
+				<iframe class="responsive-video" src="https://www.youtube.com/embed/8fhdNNwop50" frameborder="0" allowfullscreen></iframe>
+				<div class="project-content">
+				<h3>Dungeon Jumpers</h3>
+				<p>Música original.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<a href="https://globalgamejam.org/2021/games/unitystreasure-3" target="_blank" class="jam-link">
+					<img src="/images/UnityTreasure.png" alt="Unity's Treasure" class="project-img">
+				</a>
+				<div class="audio-container">
+					<iframe 
+						width="100%" 
+						height="300" 
+						scrolling="no" 
+						frameborder="no" 
+						allow="autoplay" 
+						src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1431108781&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+					</iframe>
+				</div>
+				<div class="project-content">
+					<h3>Unity's Treasure</h3>
+					<p>Global Game Jam 2021 - Banda sonora.</p>
+				</div>
+			</article>
+
+			</div>
+		</div>
+
+		<hr class="section-divider" />
+
+		<div class="project-category">
+			<h2>Música Personal</h2>
+			<div class="projects-grid">
+			
+			<article class="project-card">
+				<iframe 
+				style="border: 0; width: 100%; height: 406px;" 
+				src="https://bandcamp.com/EmbeddedPlayer/album=1374689460/size=large/bgcol=333333/linkcol=ffffff/artwork=small/transparent=true/" 
+				seamless>
+				<a href="https://arcoirisr.bandcamp.com/album/triki-traka">TRIKI TRAKA de Arco Iris R</a>
+				</iframe>
+				<div class="project-content">
+				<h3>TRIKI TRAKA (Álbum)</h3>
+				<p>Residencia artística (Arco Iris R) - Proyecto colaborativo.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe 
+				style="border: 0; width: 100%; height: 120px;" 
+				src="https://bandcamp.com/EmbeddedPlayer/album=1374689460/size=large/bgcol=333333/linkcol=ffffff/tracklist=false/artwork=small/track=245971245/transparent=true/" 
+				seamless>
+				<a href="https://arcoirisr.bandcamp.com/album/triki-traka">TRIKI TRAKA de Arco Iris R</a>
+				</iframe>
+				<div class="project-content">
+				<h3>Dopo la tempesta</h3>
+				<p>Producción, grabación y arreglos originales.</p>
+				</div>
+			</article>
+
+			<article class="project-card">
+				<iframe 
+				width="100%" 
+				height="300" 
+				scrolling="no" 
+				frameborder="no" 
+				allow="autoplay" 
+				src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/965382451&color=%23666666&auto_play=false">
+				</iframe>
+				<div class="project-content">
+				<h3>Minimooging</h3>
+				<p>Síntesis aditiva y sustractiva con Pure Data y generación de beats basados en claves africanas con sonidos sintetizados y grabados.</p>
+				</div>
+			</article>
+
+			</div>
+		</div>
+
+	</section>
+
+    <hr>
+    
+    <section id="contact" class="contact-section">
+        <div class="contact-section-header">
+            <h2>Contacto</h2>
+        </div>
+
+        <div class="form-container">
+            <form action="https://formspree.io/f/mayvgrrb" method="post" name="EmailForm" class="contact-form">
+                
+                <div class="form-group">
+                    <label for="full-name">Nombre</label>
+                    <input type="text" id="full-name" name="ContactName" placeholder="Tu nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email-address">E-mail</label>
+                    <input type="email" id="email-address" name="ContactMail" placeholder="E-mail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" name="ContactComment" rows="6" placeholder="Tu mensaje" required></textarea>
+                </div>
+
+                <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+                
+                <button class="submit-button" type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+	<script>
+		function initOverlayCarousel() {
+			const carousel = document.getElementById('carousel');
+			// 1. Capturamos las 12 imágenes originales (con sus overlays)
+			let items = Array.from(document.querySelectorAll('.carousel-item'));
+			const dotsContainer = document.getElementById('carousel-dots');
+			
+			if (items.length === 0) return;
+
+			// 2. MEZCLA ALEATORIA (Shuffle) de las 12
+			for (let i = items.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[items[i], items[j]] = [items[j], items[i]];
+			}
+
+			// 3. SELECCIÓN DE LAS TOP 4
+			// Cortamos el array para quedarnos solo con 4 elementos
+			const selectedItems = items.slice(0, 4);
+
+			// Limpiamos el carrusel y solo insertamos las 4 elegidas
+			// Como los elementos originales YA tenían el .glass-overlay, 
+			// al reinsertarlos, el overlay se mantiene.
+			carousel.innerHTML = '';
+			selectedItems.forEach(item => carousel.appendChild(item));
+
+			// A partir de aquí, trabajamos solo con las 4 seleccionadas
+			let currentIndex = 0;
+			const total = selectedItems.length;
+
+			// 4. GENERAR SOLO 4 DOTS
+			selectedItems.forEach((_, i) => {
+			const dot = document.createElement('div');
+			dot.classList.add('dot');
+			if (i === 0) dot.classList.add('active');
+			dot.addEventListener('click', () => {
+				currentIndex = i;
+				updateCarousel();
+				resetTimer();
+			});
+			dotsContainer?.appendChild(dot);
+			});
+
+			const dots = document.querySelectorAll('.dot');
+
+			function updateCarousel() {
+			selectedItems.forEach((item, index) => {
+				item.classList.remove('left', 'center', 'right', 'side');
+				
+				if (index === currentIndex) {
+				item.classList.add('center');
+				} else if (index === (currentIndex - 1 + total) % total) {
+				item.classList.add('side', 'left');
+				} else if (index === (currentIndex + 1) % total) {
+				item.classList.add('side', 'right');
+				}
+			});
+
+			dots.forEach((dot, i) => {
+				dot.classList.toggle('active', i === currentIndex);
+			});
+			}
+
+			// --- CONTROLES Y TIMERS ---
+			const nextSlide = () => { currentIndex = (currentIndex + 1) % total; updateCarousel(); };
+			const prevSlide = () => { currentIndex = (currentIndex - 1 + total) % total; updateCarousel(); };
+
+			document.getElementById('next-btn')?.addEventListener('click', () => { nextSlide(); resetTimer(); });
+			document.getElementById('prev-btn')?.addEventListener('click', () => { prevSlide(); resetTimer(); });
+
+			let autoPlayInterval;
+			function startTimer() { autoPlayInterval = setInterval(nextSlide, 5000); }
+			function resetTimer() { clearInterval(autoPlayInterval); startTimer(); }
+
+			updateCarousel();
+			startTimer();
+		}
+
+		document.addEventListener('DOMContentLoaded', initOverlayCarousel);
+	</script>
+
+</Layout>
