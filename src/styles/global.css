@@ -603,7 +603,24 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: 50% 50%;
+  /* Centro por defecto */
+  transition: object-position 0.5s ease;
+}
+
+/* 2. REGLA GLOBAL: Si una imagen tiene el atributo 'data-position', úsalo.
+   Esto funcionará tanto en PC como en móvil automáticamente. */
+.carousel-item img[data-position] {
+  object-position: attr(data-position);
+}
+
+/* 3. MEDIA QUERY: Por si prefieres que el atributo SOLO aplique en móviles,
+   o si quieres sobreescribir el comportamiento en pantallas pequeñas. */
+@media (max-width: 768px) {
+  /* Si en el futuro quieres que el data-position sea más agresivo en móvil,
+     puedes descomentar la línea de abajo o añadir reglas específicas aquí. */
+
+  /* .carousel-item img[data-mobile-position] { object-position: attr(data-mobile-position); } */
 }
 
 /* --- CONTROLES (FLECHAS) --- */
