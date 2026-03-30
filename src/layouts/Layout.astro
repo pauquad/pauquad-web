@@ -1,143 +1,203 @@
 ---
 // Importamos tu CSS global
-import '../styles/global.css';
+import "../styles/global.css";
 
 // Recibimos el título y el idioma (por defecto 'es')
 const { title = "Paula Quadrelli", lang = "es" } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang}>
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+        />
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Montserrat:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+        <script
+            src="https://kit.fontawesome.com/3d8011cf10.js"
+            crossorigin="anonymous"></script>
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/3d8011cf10.js" crossorigin="anonymous"></script>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>{title}</title>
 
-	<title>{title}</title>
+        <meta
+            name="description"
+            content="Paula Quadrelli | Composición musical original y diseño sonoro para cine, videojuegos y medios audiovisuales. Creación de paisajes sonoros inmersivos y post-producción de audio en Córdoba, Argentina."
+        />
+        <meta
+            name="keywords"
+            content="Sound Design, Composición Musical, Post-producción de audio, Astro, Paula Quadrelli"
+        />
+        <link rel="canonical" href="https://paulaquadrelli.com" />
 
-    <meta name="description" content="Paula Quadrelli | Composición musical original y diseño sonoro para cine, videojuegos y medios audiovisuales. Creación de paisajes sonoros inmersivos y post-producción de audio en Córdoba, Argentina.">
-    <meta name="keywords" content="Sound Design, Composición Musical, Post-producción de audio, Astro, Paula Quadrelli">
-    <link rel="canonical" href="https://paulaquadrelli.com" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://paulaquadrelli.com/" />
+        <meta property="og:title" content={title} />
+        <meta
+            property="og:description"
+            content="Música original y paisajes sonoros inmersivos para proyectos creativos."
+        />
+        <meta
+            property="og:image"
+            content="https://paulaquadrelli.com/images/og-image.jpg"
+        />
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://paulaquadrelli.com/">
-    <meta property="og:title" content={title}>
-    <meta property="og:description" content="Música original y paisajes sonoros inmersivos para proyectos creativos.">
-    <meta property="og:image" content="https://paulaquadrelli.com/images/og-image.jpg">
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta
+            name="twitter:description"
+            content="Diseño sonoro y composición musical profesional."
+        />
+        <meta
+            name="twitter:image"
+            content="https://paulaquadrelli.com/images/og-image.jpg"
+        />
+    </head>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content={title}>
-    <meta name="twitter:description" content="Diseño sonoro y composición musical profesional.">
-    <meta name="twitter:image" content="https://paulaquadrelli.com/images/og-image.jpg">
-</head>
+    <body>
+        <div class="container">
+            <header id="header">
+                <nav id="navbar" class="nav">
+                    <div class="nav-container">
+                        <a href="/#welcome-section" class="nav-logo">
+                            <img
+                                src="/images/logo-pq.svg"
+                                alt="Logo Paula Quadrelli"
+                            />
+                        </a>
 
-<body>
+                        <button id="menu-toggle" class="menu-toggle"
+                            >MENU</button
+                        >
 
-	<div class="container">
-		<header id="header">
-			<nav id="navbar" class="nav">
+                        <ul class="nav-list" id="nav-list">
+                            <li>
+                                <a href="/#welcome-section">Inicio </a>
+                            </li>
+                            <li>
+                                <a href="/#projects">Proyectos </a>
+                            </li>
+                            <li>
+                                <a href="/blog">Blog </a>
+                            </li>
+                            <li>
+                                <a href="/#contact">Contacto </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
 
-                <div class="nav-container">
+            <slot />
 
-                    <a href="/#welcome-section" class="nav-logo">
-                        <img src="/images/logo-pq.svg" alt="Logo Paula Quadrelli" />
+            <hr />
+
+            <footer>
+                <div class="contact-links">
+                    <a
+                        href="https://www.linkedin.com/in/paula-quadrelli/"
+                        target="_blank"
+                        class="btn contact-details"
+                    >
+                        <i class="fab fa-linkedin"></i> Linkedin
                     </a>
-
-                    <button id="menu-toggle" class="menu-toggle">MENU</button>
-
-                    <ul class="nav-list" id="nav-list">
-                        <li>
-                            <a href="/#welcome-section">Inicio </a>
-                        </li>
-                        <li>
-                            <a href="/#projects">Proyectos </a>
-                        </li>
-                        <li>
-                            <a href="/blog">Blog </a>
-                        </li>
-                        <li>
-                            <a href="/#contact">Contacto </a>
-                        </li>
-                    </ul>
-
+                    <a
+                        id="profile-link"
+                        href="https://github.com/pauquad"
+                        target="_blank"
+                        class="btn contact-details"
+                        ><i class="fab fa-github"></i> GitHub</a
+                    >
+                    <a
+                        href="https://soundcloud.com/pauquad"
+                        target="_blank"
+                        class="btn contact-details"
+                    >
+                        <i class="fa-brands fa-soundcloud"></i> SoundCloud</a
+                    >
+                    <a
+                        href="https://www.youtube.com/channel/UCUo7xApoMV-jCgsUSQ7eeTQ/featured"
+                        target="_blank"
+                        class="btn contact-details"
+                    >
+                        <i class="fab fa-youtube"></i> Youtube</a
+                    >
+                    <a
+                        href="https://pauquad.itch.io/"
+                        target="_blank"
+                        class="btn contact-details"
+                    >
+                        <i class="fa-brands fa-itch-io"></i> Itch.io</a
+                    >
+                    <a
+                        href="https://www.fiverr.com/pautina"
+                        target="_blank"
+                        class="btn contact-details one"
+                    >
+                        Fiverr</a
+                    >
                 </div>
-			</nav>
-		</header>
+            </footer>
+        </div>
 
-        <slot />
+        <script>
+            const menuToggle = document.getElementById("menu-toggle");
+            const navList = document.getElementById("nav-list");
+            const navLinks = document.querySelectorAll(".nav-list a");
 
-		<hr>
-		
-		<footer>
-			<div class="contact-links">
-				<a href="https://www.linkedin.com/in/paula-quadrelli/" target="_blank" class="btn contact-details">
-					<i class="fab fa-linkedin"></i> Linkedin
-				</a>
-				<a id="profile-link" href="https://github.com/pauquad" target="_blank" class="btn contact-details"><i class="fab fa-github"></i> GitHub</a>
-				<a href="https://soundcloud.com/pauquad" target="_blank" class="btn contact-details">
-					<i class="fa-brands fa-soundcloud"></i> SoundCloud</a>
-				<a href="https://www.youtube.com/channel/UCUo7xApoMV-jCgsUSQ7eeTQ/featured" target="_blank" class="btn contact-details">
-					<i class="fab fa-youtube"></i> Youtube</a>
-				<a href="https://pauquad.itch.io/" target="_blank" class="btn contact-details">
-					<i class="fa-brands fa-itch-io"></i> Itch.io</a>
-				<a href="https://www.fiverr.com/pautina" target="_blank" class="btn contact-details one"> Fiverr</a>
-			</div>
-		</footer>
+            // Toggle the menu when the button is clicked
+            if (menuToggle && navList) {
+                menuToggle.addEventListener("click", () => {
+                    navList.classList.toggle("active");
 
-	</div>
+                    // Change button text from MENU to CLOSE
+                    if (navList.classList.contains("active")) {
+                        menuToggle.textContent = "CLOSE";
+                    } else {
+                        menuToggle.textContent = "MENU";
+                    }
+                });
+            }
 
-	<script>
-		const menuToggle = document.getElementById('menu-toggle');
-		const navList = document.getElementById('nav-list');
-		const navLinks = document.querySelectorAll('.nav-list a');
+            // Close the menu automatically when a link is clicked
+            navLinks.forEach((link) => {
+                link.addEventListener("click", () => {
+                    navList?.classList.remove("active");
+                    if (menuToggle) menuToggle.textContent = "MENU";
+                });
+            });
 
-		// Toggle the menu when the button is clicked
-		if(menuToggle && navList) {
-            menuToggle.addEventListener('click', () => {
-                navList.classList.toggle('active');
+            // Botón ir arriba
+            const backToTopBtn = document.getElementById("back-to-top");
 
-                // Change button text from MENU to CLOSE
-                if (navList.classList.contains('active')) {
-                    menuToggle.textContent = 'CLOSE';
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 400) {
+                    backToTopBtn?.classList.add("show");
                 } else {
-                    menuToggle.textContent = 'MENU';
+                    backToTopBtn?.classList.remove("show");
                 }
             });
-        }
 
-		// Close the menu automatically when a link is clicked
-		navLinks.forEach(link => {
-			link.addEventListener('click', () => {
-				navList.classList.remove('active');
-				if(menuToggle) menuToggle.textContent = 'MENU';
-			});
-		});
+            backToTopBtn?.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        </script>
 
-        // Botón ir arriba
-        const backToTopBtn = document.getElementById('back-to-top');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-            backToTopBtn?.classList.add('show');
-            } else {
-            backToTopBtn?.classList.remove('show');
-            }
-        });
-
-        backToTopBtn?.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-	</script>
-
-    <button id="back-to-top" class="back-to-top" aria-label="Volver al inicio">
-  <i class="fas fa-chevron-up"></i> </button>
-</body>
+        <button
+            id="back-to-top"
+            class="back-to-top"
+            aria-label="Volver al inicio"
+        >
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </body>
 </html>
