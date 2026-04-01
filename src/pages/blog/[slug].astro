@@ -1,13 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { PortableText } from "astro-portabletext"; // El motor de renderizado
 import { loadQuery } from "../../sanity/lib/load-query";
 
-// 1. Definimos la forma del Post para que TypeScript entienda
+// 1. Definimos la interfaz del Post para que TypeScript no se queje
 interface Post {
     title: string;
     slug: { current: string };
     publishedAt?: string;
-    body?: any;
+    body?: any; // El contenido enriquecido de Sanity
     resources?: Array<{
         label: string;
         url: string;
@@ -15,8 +16,8 @@ interface Post {
     }>;
 }
 
+// 2. Generamos las rutas estáticas para cada post
 export async function getStaticPaths() {
-    // 2. Le decimos que 'posts' es un Array de Posts <Post[]>
     const { data: posts } = await loadQuery<Post[]>({
         query: `*[_type == "post"]`,
     });
@@ -28,7 +29,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 
-// 3. Aquí también le avisamos que el resultado es un <Post>
+// 3. Traemos los datos del post específico
 const { data: post } = await loadQuery<Post>({
     query: `*[_type == "post" && slug.current == $slug][0]`,
     params: { slug },
@@ -42,27 +43,47 @@ const { data: post } = await loadQuery<Post>({
             <h1>{post.title}</h1>
             {
                 post.publishedAt && (
-                    <time>
-                        {new Date(post.publishedAt).toLocaleDateString("es-ES")}
+                    <time datetime={post.publishedAt}>
+                        {new Date(post.publishedAt).toLocaleDateString(
+                            "es-ES",
+                            {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                            },
+                        )}
                     </time>
                 )
             }
         </header>
 
         <div class="post-body">
-            {/* Aquí es donde irá el contenido largo (Portable Text) */}
-            <p>Próximamente: El contenido detallado de este post.</p>
+            {/* 4. Renderizado dinámico del contenido de Sanity */}
+            {
+                post.body ? (
+                    <PortableText value={post.body} />
+                ) : (
+                    <p class="placeholder-text">
+                        Este post aún no tiene contenido detallado.
+                    </p>
+                )
+            }
         </div>
 
+        {/* 5. Sección de recursos adicionales */}
         {
-            post.resources && (
+            post.resources && post.resources.length > 0 && (
                 <aside class="post-resources-sidebar">
                     <h3>Recursos Relacionados</h3>
                     <ul>
                         {post.resources.map((res) => (
                             <li>
-                                <a href={res.url} target="_blank">
-                                    {res.label}
+                                <a
+                                    href={res.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <i class={res.icon} /> {res.label}
                                 </a>
                             </li>
                         ))}
@@ -75,16 +96,9 @@ const { data: post } = await loadQuery<Post>({
 
 <style>
     .post-detail-container {
-        max-width: 1000px;
+        max-width: 900px; /* Un poco más estrecho para mejor lectura */
         margin: 0 auto;
-
-        /* Espaciado para que no choque con la Navbar */
-        padding-top: 150px;
-        padding-bottom: 80px;
-        padding-left: 20px;
-        padding-right: 20px;
-
-        /* Usamos block para el flujo natural, pero alineamos contenido */
+        padding: 150px 20px 80px;
         display: block;
         text-align: left;
     }
@@ -95,11 +109,10 @@ const { data: post } = await loadQuery<Post>({
         gap: 0.5rem;
         color: var(--accent, #686ac4);
         text-decoration: none;
-        font-size: 1.8rem;
+        font-size: 1.2rem;
         font-weight: 500;
         margin-bottom: 2.5rem;
         transition: transform 0.2s ease;
-        margin-right: auto; /* Fuerza el anclaje a la izquierda */
     }
 
     .back-link:hover {
@@ -109,69 +122,93 @@ const { data: post } = await loadQuery<Post>({
     h1 {
         text-wrap: balance;
         font-size: clamp(2.5rem, 6vw, 4rem);
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         line-height: 1.1;
-        text-align: left;
-        width: 100%;
         color: #ffffff;
     }
 
+    time {
+        display: block;
+        color: #888;
+        font-size: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    /* ESTILOS PARA EL CONTENIDO DE PORTABLE TEXT */
     .post-body {
         width: 100%;
         font-size: 1.2rem;
         line-height: 1.8;
-        margin-top: 2rem;
         color: #e0e0e0;
-        text-align: left; /* Forzamos alineación de párrafos */
     }
 
-    /* Estilos para la sección de recursos dentro del post individual */
-    .post-resources-sidebar {
-        width: 100%;
-        margin-top: 4rem;
-        padding-top: 2rem;
-        border-top: 1px solid #333;
+    /* Estilos inyectados para etiquetas de Sanity */
+    .post-body :global(p) {
+        margin-bottom: 1.8rem;
+    }
 
-        /* Alineación base */
-        display: block;
-        text-align: left;
+    .post-body :global(h2) {
+        margin-top: 3rem;
+        margin-bottom: 1.2rem;
+        color: #ffffff;
+        font-size: 2.2rem;
+    }
+
+    .post-body :global(ul) {
+        margin-bottom: 1.8rem;
+        padding-left: 1.5rem;
+        list-style: disc;
+    }
+
+    .post-body :global(li) {
+        margin-bottom: 0.8rem;
+    }
+
+    .post-body :global(a) {
+        color: var(--accent, #686ac4);
+        text-decoration: underline;
+    }
+
+    .placeholder-text {
+        font-style: italic;
+        opacity: 0.6;
+    }
+
+    /* SECCIÓN DE RECURSOS */
+    .post-resources-sidebar {
+        margin-top: 5rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid #333;
     }
 
     .post-resources-sidebar h3 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
         color: #ffffff;
-        display: block;
-        width: 100%;
     }
 
     .post-resources-sidebar ul {
         list-style: none;
         padding: 0;
-        margin: 0;
-        display: block; /* Asegura que la lista sea un bloque vertical */
-        width: 100%;
     }
 
     .post-resources-sidebar li {
-        display: block; /* FORZAMOS un link por renglón */
         margin-bottom: 1.5rem;
-        width: 100%;
-        text-align: left;
     }
 
     .post-resources-sidebar a {
         color: #dbdbe0;
         text-decoration: none;
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         font-weight: 500;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
         transition: all 0.2s ease;
     }
 
     .post-resources-sidebar a:hover {
-        opacity: 0.8;
-        text-decoration: underline;
+        color: var(--accent, #686ac4);
         transform: translateX(8px);
     }
 </style>
