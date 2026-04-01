@@ -1,5 +1,5 @@
-import { defineConfig } from 'astro/config';
 import sanity from '@sanity/astro';
+import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 import react from '@astrojs/react';
 
@@ -7,8 +7,9 @@ import react from '@astrojs/react';
 export default defineConfig({
     site: 'https://paulaquadrelli.com',
     output: 'static',
-    adapter: cloudflare(),
-
+    adapter: cloudflare({
+        mode: 'directory',
+    }),
     integrations: [
         react(),
         sanity({
