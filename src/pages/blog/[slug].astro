@@ -1,0 +1,177 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { loadQuery } from "../../sanity/lib/load-query";
+
+// 1. Definimos la forma del Post para que TypeScript entienda
+interface Post {
+    title: string;
+    slug: { current: string };
+    publishedAt?: string;
+    body?: any;
+    resources?: Array<{
+        label: string;
+        url: string;
+        icon: string;
+    }>;
+}
+
+export async function getStaticPaths() {
+    // 2. Le decimos que 'posts' es un Array de Posts <Post[]>
+    const { data: posts } = await loadQuery<Post[]>({
+        query: `*[_type == "post"]`,
+    });
+
+    return posts.map((post) => ({
+        params: { slug: post.slug.current },
+    }));
+}
+
+const { slug } = Astro.params;
+
+// 3. Aquí también le avisamos que el resultado es un <Post>
+const { data: post } = await loadQuery<Post>({
+    query: `*[_type == "post" && slug.current == $slug][0]`,
+    params: { slug },
+});
+---
+
+<Layout title={`${post.title} | Paula Quadrelli`} lang="es">
+    <article class="post-detail-container">
+        <header class="post-header">
+            <a href="/blog" class="back-link">← Volver al Blog</a>
+            <h1>{post.title}</h1>
+            {
+                post.publishedAt && (
+                    <time>
+                        {new Date(post.publishedAt).toLocaleDateString("es-ES")}
+                    </time>
+                )
+            }
+        </header>
+
+        <div class="post-body">
+            {/* Aquí es donde irá el contenido largo (Portable Text) */}
+            <p>Próximamente: El contenido detallado de este post.</p>
+        </div>
+
+        {
+            post.resources && (
+                <aside class="post-resources-sidebar">
+                    <h3>Recursos Relacionados</h3>
+                    <ul>
+                        {post.resources.map((res) => (
+                            <li>
+                                <a href={res.url} target="_blank">
+                                    {res.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
+            )
+        }
+    </article>
+</Layout>
+
+<style>
+    .post-detail-container {
+        max-width: 1000px;
+        margin: 0 auto;
+
+        /* Espaciado para que no choque con la Navbar */
+        padding-top: 150px;
+        padding-bottom: 80px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        /* Usamos block para el flujo natural, pero alineamos contenido */
+        display: block;
+        text-align: left;
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--accent, #686ac4);
+        text-decoration: none;
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin-bottom: 2.5rem;
+        transition: transform 0.2s ease;
+        margin-right: auto; /* Fuerza el anclaje a la izquierda */
+    }
+
+    .back-link:hover {
+        transform: translateX(-5px);
+    }
+
+    h1 {
+        text-wrap: balance;
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        text-align: left;
+        width: 100%;
+        color: #ffffff;
+    }
+
+    .post-body {
+        width: 100%;
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-top: 2rem;
+        color: #e0e0e0;
+        text-align: left; /* Forzamos alineación de párrafos */
+    }
+
+    /* Estilos para la sección de recursos dentro del post individual */
+    .post-resources-sidebar {
+        width: 100%;
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid #333;
+
+        /* Alineación base */
+        display: block;
+        text-align: left;
+    }
+
+    .post-resources-sidebar h3 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #ffffff;
+        display: block;
+        width: 100%;
+    }
+
+    .post-resources-sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: block; /* Asegura que la lista sea un bloque vertical */
+        width: 100%;
+    }
+
+    .post-resources-sidebar li {
+        display: block; /* FORZAMOS un link por renglón */
+        margin-bottom: 1.5rem; 
+        width: 100%;
+        text-align: left;
+    }
+
+    .post-resources-sidebar a {
+        color: #dbdbe0;
+        text-decoration: none;
+        font-size: 1.8rem; 
+        font-weight: 500;
+        display: inline-block; 
+        transition: all 0.2s ease;
+    }
+
+    .post-resources-sidebar a:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+        transform: translateX(8px); /
+    }
+</style>

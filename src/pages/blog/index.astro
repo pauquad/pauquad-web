@@ -1,0 +1,97 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { loadQuery } from "../../sanity/lib/load-query";
+
+// 1. Definimos la "forma" de tu post para que TypeScript no se queje
+interface Post {
+    title: string;
+    slug: { current: string };
+    publishedAt: string;
+    excerpt?: string;
+    resources?: Array<{
+        label: string;
+        url: string;
+        icon: string;
+    }>;
+}
+
+// 2. Le pasamos esa interface al loadQuery usando los < >
+const { data: posts } = await loadQuery<Post[]>({
+    query: `*[_type == "post"] | order(publishedAt desc)`,
+});
+---
+
+<Layout title="Blog & Resources | Paula Quadrelli" lang="es">
+    <section class="blog-container">
+        <header class="blog-header-simple">
+            <h1>Blog & Recursos</h1>
+            <p>
+                Reflexiones sobre diseño sonoro, música y recursos para la
+                comunidad.
+            </p>
+        </header>
+
+        <div class="blog-grid">
+            {
+                posts.map((post) => (
+                    <article class="post-card">
+                        <div class="post-content">
+                            <h2>{post.title}</h2>
+
+                            {/* Si el post tiene recursos, los mostramos aquí */}
+                            {post.resources && (
+                                <details class="resources-dropdown">
+                                    <summary>Recursos de este post</summary>
+                                    <div class="resources-content">
+                                        <ul class="rec-list">
+                                            {post.resources.map((res) => (
+                                                <li>
+                                                    <a
+                                                        href={res.url}
+                                                        target="_blank"
+                                                    >
+                                                        <i class={res.icon} />{" "}
+                                                        {res.label}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </details>
+                            )}
+
+                            <p>
+                                {post.excerpt ||
+                                    "Explora estos recursos y reflexiones."}
+                            </p>
+                            <a
+                                href={`/blog/${post.slug.current}`}
+                                class="read-more"
+                            >
+                                Leer más →
+                            </a>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </section>
+</Layout>
+
+<style>
+    summary {
+        cursor: pointer; /* Indica que es cliqueable */
+        font-weight: 600;
+        padding: 0.5rem 0;
+        transition: color 0.2s ease;
+    }
+
+    summary:hover {
+        color: var(--accent, #070bf4); /* Cambia de color al pasar el mouse */
+    }
+
+    /* Opcional: quitar la flechita por defecto en algunos navegadores */
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+</style>

@@ -17,6 +17,9 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    "types": [
+      "@sanity/astro/module"
+    ]
   }
 }
