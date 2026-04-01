@@ -1,15 +1,12 @@
 import sanity from '@sanity/astro';
 import { defineConfig } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
 import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
     site: 'https://paulaquadrelli.com',
     output: 'static',
-    adapter: cloudflare({
-        mode: 'directory',
-    }),
+
     integrations: [
         react(),
         sanity({
